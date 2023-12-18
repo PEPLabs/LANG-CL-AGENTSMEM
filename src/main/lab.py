@@ -46,11 +46,7 @@ tools = [
         name="greeting",
         description="When the user sends a greeting, send a greeting back.",
     ),
-    Tool.from_function(
-        func=get_historical_fact,
-        name="historical_fact",
-        description="If the user asks for a historical fact, give them one related to the topic they choose.",
-    ),
+    "TODO"
 ]
 
 
@@ -58,7 +54,7 @@ tools = [
 Defining a conversational agent that DOES NOT STORE any conversation history. 
 DON'T EDIT THIS CODE, as it's meant to serve as a sample in src/lab.py and proof of concept in src/app.py
 
-First, we define a ConversationBufferWindowMemory object, and store 0 previous interactions in memory.
+First, we define a ConversationBufferWindowMemory object, and store 0 previous interactions in memory. (k=0)
 (Spoiler: this is not likely to create an agent that remembers things...)
 
 Next, we use the initialize_agent function, to create an agent providing it with the tools and llm defined above.  
@@ -87,14 +83,7 @@ Defining a conversational agent that STORES 3 previous interactions in memory.
 This is the main task of the lab
 """
 # TODO: instantiate a ConversationBufferWindowMemory object that stores 3 previous interactions in memory
-memory_with_history = ConversationBufferWindowMemory(memory_key="chat_history", k=3)
+memory_with_history = "TODO"
 
 # TODO: define a conversational agent that uses memory_with_history for its memory attribute
-agent_executor_with_memory = initialize_agent(
-    tools,
-    llm,
-    agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
-    # verbose=True,
-    memory=memory_with_history,
-    handle_parsing_errors=True
-)
+agent_executor_with_memory = "TODO"
