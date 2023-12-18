@@ -20,7 +20,7 @@ an Agent's "memory" attribute to define a memory mechanism that the LLM can use 
 
 ConversationBufferWindowMemory maintains a record of the conversation's previous interactions, 
 limited to the number defined in the "k" attribute. Only the last "k" interactions are stored.
-In other words, ConversationBufferWindowMemory maintains a "window" of previous interactions. 
+In other words, ConversationBufferWindowMemory maintains a "window" of previous interactions defined by "k". 
 
 https://python.langchain.com/docs/modules/memory/types/buffer_window
 """
@@ -56,7 +56,7 @@ tools = [
 
 """
 Defining a conversational agent that DOES NOT STORE any conversation history. 
-DON'T EDIT THIS CODE, as it's meant to serve as a proof of concept in src/app.py
+DON'T EDIT THIS CODE, as it's meant to serve as a sample in src/lab.py and proof of concept in src/app.py
 
 First, we define a ConversationBufferWindowMemory object, and store 0 previous interactions in memory.
 (Spoiler: this is not likely to create an agent that remembers things...)

@@ -1,13 +1,13 @@
 from src.main.lab import agent_executor_no_memory, agent_executor_with_memory
 
 """
-This file will contain some sample code that invokes conversational agents with and without memory.
+This file contains some sample code that invokes conversational agents with and without memory.
 If the lab is completed correctly, the agent will carry on a conversation in each invocation.
 The agent will use its memory (ConversationBufferWindowMemory) to attempt to carry on the conversation.
 
 The agent without memory will fail to accurately answer questions that require memory
     -("What's my name?" "Who did the historical figure marry?")
-The agent with memory will succeed in answering these questions.
+The agent with memory will have better luck answering these questions.
 
 If you would like to see the agent's thought process, uncomment "verbose=True" in initialize_agent() found in lab.py
 
