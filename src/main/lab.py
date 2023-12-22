@@ -46,7 +46,7 @@ tools = [
         name="greeting",
         description="When the user sends a greeting, send a greeting back.",
     ),
-    "TODO"
+    # SECOND TOOL GOES HERE
 ]
 
 
