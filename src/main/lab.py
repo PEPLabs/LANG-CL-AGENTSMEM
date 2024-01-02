@@ -19,7 +19,8 @@ https://python.langchain.com/docs/modules/memory/types/buffer_window
 """
 
 """
-Defining our LLM here, as well as the functions for the tools that our agent will use. No need to edit these
+Defining our LLM here to include for our chat model, as well as the text input & functions for the tools that our agent
+will use. No need to edit these
 """
 llm = HuggingFaceEndpoint(
         endpoint_url=os.environ['LLM_ENDPOINT'],
