@@ -55,11 +55,6 @@ tools = [
         description="When the user sends a greeting, send a greeting back.",
     ),
     # SECOND TOOL GOES HERE
-    Tool.from_function(
-        func=get_historical_fact,
-        name="get_historical_fact",
-        description="If the user asks for a historical fact, give them a concise summary of the topic.",
-    )
 ]
 
 
@@ -96,14 +91,7 @@ Defining a conversational agent that STORES 3 previous interactions in memory.
 This is the main task of the lab
 """
 # TODO: instantiate a ConversationBufferWindowMemory object that stores 2 previous interactions in memory
-memory_with_history = ConversationBufferWindowMemory(memory_key="chat_history", k=3)
+memory_with_history = "TODO"
 
 # TODO: define a conversational agent that uses memory_with_history for its memory attribute
-agent_executor_with_memory = initialize_agent(
-    tools,
-    chat_model,
-    agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
-    verbose=True,
-    memory=memory_with_history,
-    handle_parsing_errors=True
-)
+agent_executor_with_memory = "TODO"
