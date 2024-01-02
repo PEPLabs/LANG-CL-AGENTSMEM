@@ -18,67 +18,33 @@ issue with how agents parse outputs. Don't hesitate to re-run app.py to see if i
 For now, we prevent an Exception being thrown by including handle_parsing_errors=True in initialize_agent().
 """
 
+"""Question Presets defined here"""
+question_list = [
+    "Hi, how are you? My name is Samuel",
+    "What is my name?",
+    "What can you tell me about the historical figure Trajan?",
+    "Who was he married to?",
+    "Just for fun, Can you tell me my name again?"
+]
+
 def main():
 
     print("INVOKING AGENT WITHOUT MEMORY--------------------------------- ")
 
-    response = agent_executor_no_memory.invoke(
-        {"input": "Hi, how are you? My name is Developer"},
-    )
-    print("INPUT: [Hi, how are you? My name is Developer]")
-    print("OUTPUT: " + response["output"])
-
-    response = agent_executor_no_memory.invoke(
-        {"input": "Do you know my name?"},
-    )
-    print("INPUT: [Do you know my name?]")
-    print("OUTPUT: " + response["output"])
-
-    response = agent_executor_no_memory.invoke(
-        {"input": "What can you tell me about the historical figure Trajan?"},
-    )
-    print("INPUT: [What can you tell me about the historical figure Trajan?]")
-    print("OUTPUT: " + response["output"])
-
-    response = agent_executor_no_memory.invoke(
-        {"input": "Who did the historical figure marry?"},
-    )
-    print("INPUT: [Who did the historical figure marry?]")
-    print("OUTPUT: " + response["output"])
+    for question in question_list:
+        response = agent_executor_no_memory.invoke(
+            {"input": question},
+        )
+        print(f"INPUT: {question}")
+        print("OUTPUT: " + response["output"])
 
     print("INVOKING AGENT WITH MEMORY------------------------------------")
-
-    response = agent_executor_with_memory.invoke(
-        {"input": "Hi, how are you? My name is Developer"},
-    )
-    print("INPUT: [Hi, how are you? My name is Developer]")
-    print("OUTPUT: " + response["output"])
-
-    response = agent_executor_with_memory.invoke(
-        {"input": "Do you know my name?"},
-    )
-    print("INPUT: [Do you know my name?]")
-    print("OUTPUT: " + response["output"])
-
-    response = agent_executor_with_memory.invoke(
-        {"input": "What can you tell me about the historical figure Trajan?"},
-    )
-    print("INPUT: [What can you tell me about the historical figure Trajan?]")
-    print("OUTPUT: " + response["output"])
-
-    # NOTE: On occasion, the agent trips on itself here.
-    # Try running app.py again if the stack track implies an incorrect input.
-    response = agent_executor_with_memory.invoke(
-        {"input": "Who was the historical figure married to?"},
-    )
-    print("INPUT: [Who was the historical figure married to?]")
-    print("OUTPUT: " + response["output"])
-
-    response = agent_executor_with_memory.invoke(
-        {"input": "Just for fun, Can you tell me my name again?"},
-    )
-    print("INPUT: [Just for fun, Can you tell me my name again?]")
-    print("OUTPUT: " + response["output"])
+    for question in question_list:
+        response = agent_executor_with_memory.invoke(
+            {"input": question},
+        )
+        print(f"INPUT: {question}")
+        print("OUTPUT: " + response["output"])
 
 
 if __name__ == '__main__':

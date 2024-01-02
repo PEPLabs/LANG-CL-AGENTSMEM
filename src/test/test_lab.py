@@ -11,6 +11,15 @@ solution in main/lab.py. You should not modify the code in this file. You should
 also manually test your solution by running app.py.
 """
 
+"""Question Presets defined here"""
+hi, my_name, trajan, trajans_wife, my_name_again = [
+    "Hi, how are you? My name is Samuel",
+    "What is my name?",
+    "What can you tell me about the historical figure Trajan?",
+    "Who was he married to?",
+    "Just for fun, Can you tell me my name again?"
+]
+
 class TestLLMResponse(unittest.TestCase):
     """
     This function is a sanity check for the Language Learning Model (LLM) connection.
@@ -36,24 +45,24 @@ class TestLLMResponse(unittest.TestCase):
     def test_agent_with_no_memory(self):
 
         agent_executor_no_memory.invoke(
-            {"input": "Hi, how are you? My name is Developer"},
+            {"input": hi},
         )
 
-        self.assertNotIn("Developer", agent_executor_no_memory("Do you know my name?"))
+        self.assertNotIn("Samuel", agent_executor_no_memory.invoke(my_name)["output"])
 
     """
     This test will verify that the agent with memory is able to remember facts about the conversation.
     """
     def test_agent_remembers_conversation(self):
         agent_executor_with_memory.invoke(
-            {"input": "Hi, how are you? My name is Developer"},
+            {"input": hi},
         )
 
         response = agent_executor_with_memory.invoke(
-            {"input": "Do you know my name?"},
+            {"input": my_name},
         )
 
-        self.assertIn("Developer", response["output"])
+        self.assertIn("Samuel", response["output"])
 
     """
     This test will verify that the agent produces the correct answer, even if the user hasn't stated it.
@@ -62,11 +71,11 @@ class TestLLMResponse(unittest.TestCase):
     def test_agent_gets_correct_answer(self):
 
         agent_executor_with_memory.invoke(
-            {"input": "What can you tell me about Trajan?"},
+            {"input": trajan},
         )
 
         response = agent_executor_with_memory.invoke(
-            {"input": "Who was the historical figure married to?"},
+            {"input": trajans_wife},
         )
 
         self.assertIn("Pompeia" or "Plotina", response["output"])
