@@ -1,17 +1,10 @@
 import os
 
-from langchain.chat_models import AzureChatOpenAI
-from langchain.agents import initialize_agent, AgentType
+from langchain.agents import AgentType, initialize_agent
 from langchain.memory import ConversationBufferWindowMemory
+from langchain_community.chat_models import ChatHuggingFace
+from langchain_community.llms.huggingface_endpoint import HuggingFaceEndpoint
 from langchain_core.tools import Tool
-
-"""
-All requests to the LLM require some form of a key.
-Other sensitive data has also been hidden through environment variables.
-"""
-api_key = os.environ['OPENAI_API_KEY']
-base_url = os.environ['OPENAI_API_BASE']
-version = os.environ['OPENAI_API_VERSION']
 
 """
 This lab will guide you through defining LangChain Agents with ConversationBufferWindowMemory. 
@@ -26,17 +19,33 @@ https://python.langchain.com/docs/modules/memory/types/buffer_window
 """
 
 """
-Defining our LLM here, as well as the functions for the tools that our agent will use. No need to edit these
+Defining our LLM here to include for our chat model, as well as the text input & functions for the tools that our agent
+will use. No need to edit these
 """
-llm = AzureChatOpenAI(model_name="gpt-35-turbo")
+llm = HuggingFaceEndpoint(
+        endpoint_url=os.environ['LLM_ENDPOINT'],
+        task="text2text-generation",
+        model_kwargs={
+            "max_new_tokens": 200
+        }
+    )
+chat_model = ChatHuggingFace(llm=llm)
+textInput = """
+<|system|>
+You are that helpful AI that responds concisely</s>
+<|user|>
+{userInput}</s>
+<|assistant|>
+"""
 
 def greeting(input):
-    """When the user greets you, greet them back."""
-    return llm.invoke(input)
+    """When the user greets you, greet them back. Nothing else would be said."""
+    return chat_model.invoke(textInput.format(userInput=input))
+
 
 def get_historical_fact(input):
     """If the user asks for a historical fact, give them a concise summary of the topic."""
-    return llm.invoke("Can you give me one fact about " + input + "?")
+    return chat_model.invoke(textInput.format(userInput=input))
 
 
 # TODO: define the second tool that the agent will have access to (get_historical_fact)
@@ -71,9 +80,9 @@ memory_no_history = ConversationBufferWindowMemory(memory_key="chat_history", k=
 
 agent_executor_no_memory = initialize_agent(
     tools,
-    llm,
+    chat_model,
     agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
-    # verbose=True,
+    verbose=True,
     memory=memory_no_history,
     handle_parsing_errors=True
 )
@@ -82,7 +91,7 @@ agent_executor_no_memory = initialize_agent(
 Defining a conversational agent that STORES 3 previous interactions in memory. 
 This is the main task of the lab
 """
-# TODO: instantiate a ConversationBufferWindowMemory object that stores 3 previous interactions in memory
+# TODO: instantiate a ConversationBufferWindowMemory object that stores 2 previous interactions in memory
 memory_with_history = "TODO"
 
 # TODO: define a conversational agent that uses memory_with_history for its memory attribute
