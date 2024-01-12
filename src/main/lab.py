@@ -91,7 +91,7 @@ agent_executor_no_memory = initialize_agent(
 Defining a conversational agent that STORES 3 previous interactions in memory. 
 This is the main task of the lab
 """
-# TODO: instantiate a ConversationBufferWindowMemory object that stores 2 previous interactions in memory
+# TODO: instantiate a ConversationBufferWindowMemory object that stores k=3 previous interactions in memory
 memory_with_history = "TODO"
 
 # TODO: define a conversational agent that uses memory_with_history for its memory attribute
